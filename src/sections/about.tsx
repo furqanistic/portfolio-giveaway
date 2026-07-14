@@ -46,7 +46,7 @@ export function About() {
           <figure className="about-portrait relative aspect-[2.63/1] overflow-hidden bg-card">
             <img
               src="/about/editorial-portrait.jpg"
-              alt="Editorial black-and-white portrait"
+              alt="Editorial black-and-white portrait representing Abdullah Shahid"
               width={2035}
               height={773}
               loading="lazy"

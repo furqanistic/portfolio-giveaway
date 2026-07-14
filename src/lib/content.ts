@@ -1,11 +1,11 @@
 // ───────────────────────────────────────────────────────────────
-// Single content source for the giveaway recipient's portfolio.
+// Single content source — all data drawn from Abdullah Shahid's
 // No invented metrics, testimonials, or projects.
 // ───────────────────────────────────────────────────────────────
 
 export const person = {
-  name: "Portfolio Giveaway",
-  initials: "PG",
+  name: "Abdullah Shahid",
+  initials: "AS",
   role: "Backend Software Engineer",
   shortRole: "Backend Engineer",
   location: "Faisalabad, Pakistan",

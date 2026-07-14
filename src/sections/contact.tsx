@@ -127,7 +127,7 @@ export function Contact() {
             e.preventDefault()
             const data = new FormData(e.currentTarget)
             const body = [
-              "Hello,",
+              "Hi Abdullah,",
               "",
               String(data.get("message") ?? ""),
               "",
