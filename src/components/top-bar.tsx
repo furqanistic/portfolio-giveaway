@@ -18,11 +18,10 @@ export function TopBar() {
           event.preventDefault()
           smoothScrollTo("#intro")
         }}
-        className="flex shrink-0 items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+        className="shrink-0 text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-4 focus-visible:ring-offset-background"
         aria-label={`${person.name}, back to intro`}
       >
-        <span className="brand-mark">AS</span>
-        <span className="text-sm font-semibold tracking-tight">{person.name}</span>
+        {person.name}
       </a>
 
       <nav aria-label="Primary" className="ml-auto">
