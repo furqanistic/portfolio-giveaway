@@ -1,10 +1,16 @@
 # Portfolio Giveaway — Backend Engineer Portfolio
 
+> [!IMPORTANT]
+> ### 🎁 1,500 Subscribers Portfolio Giveaway
+> **Make it yours with AI:** give your AI assistant your LinkedIn profile and résumé, then ask it to update [`src/lib/content.ts`](./src/lib/content.ts). The portfolio’s structure stays intact while the projects, experience, skills, links, and contact details become yours.
+>
+> **Highly SEO-optimized foundation:** canonical URL, `robots.txt`, sitemap, Open Graph and Twitter previews, JSON-LD structured data, and a web manifest are already included.
+>
+> [**View the live portfolio →**](https://portfolio-giveaway.netlify.app) · [**Watch the giveaway livestream →**](https://www.youtube.com/live/5Dc5UXLDjv8?si=vWxBUtVN8NJQRsOh)
+
 A fast, editorial-style portfolio for a backend engineer focused on production Laravel systems, APIs, payments, search, data, and integrations.
 
 Built as a responsive single-page experience with an accessible dark/light theme, purposeful motion, and a technical work archive instead of generic portfolio cards.
-
-[**View the live portfolio →**](https://portfolio-giveaway.netlify.app)
 
 > This portfolio was created as a giveaway to celebrate reaching 1,500 YouTube subscribers. Watch the [giveaway livestream](https://www.youtube.com/live/5Dc5UXLDjv8?si=vWxBUtVN8NJQRsOh).
 
