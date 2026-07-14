@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "description": "A fast, editorial React portfolio for backend software engineer Abdullah Shahid.",
+  "license": "MIT",
   "homepage": "https://portfolio-giveaway.netlify.app/",
   "repository": {
     "type": "git",

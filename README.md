@@ -90,7 +90,11 @@ public/            # Project images, portrait, favicon, SEO files
 
 ## Contributing
 
-Issues and focused improvements are welcome. For substantial changes, open an issue first so the direction stays consistent with the portfolio’s editorial and performance goals.
+Issues and focused improvements are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for local setup, pull request, and quality guidelines.
+
+## License
+
+Released under the [MIT License](./LICENSE). You can use, modify, and distribute this project with the included copyright and license notice.
 
 ## Contact
 
