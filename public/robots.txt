@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://furqanistic.github.io/portfolio-giveaway/sitemap.xml
+Sitemap: https://portfolio-giveaway.netlify.app/sitemap.xml

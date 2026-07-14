@@ -3,7 +3,7 @@
 ## Visual truth and test state
 
 - Source visual truth: `/Users/furqan/.codex/generated_images/019f6063-9cc4-7a92-b35d-0c8fd421f0d3/exec-55f24879-8c6f-4b1c-88f2-9ab41d549da7.png`
-- Generated portrait asset: `/Users/furqan/Furqan/giveaway/public/about/abdullah-editorial-portrait.jpg`
+- Generated portrait asset: `/Users/furqan/Furqan/giveaway/public/about/editorial-portrait.jpg`
 - Desktop implementation screenshot: `/Users/furqan/Furqan/giveaway/.audit/after/12-about-topbar-desktop.png`
 - Mobile implementation screenshot: `/Users/furqan/Furqan/giveaway/.audit/after/13-about-mobile.png`
 - Desktop viewport: 1440 × 1024

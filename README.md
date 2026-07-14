@@ -1,8 +1,10 @@
-# Abdullah Shahid — Backend Engineer Portfolio
+# Portfolio Giveaway — Backend Engineer Portfolio
 
-A fast, editorial-style portfolio for **Abdullah Shahid**, a backend software engineer focused on production Laravel systems, APIs, payments, search, data, and integrations.
+A fast, editorial-style portfolio for a backend engineer focused on production Laravel systems, APIs, payments, search, data, and integrations.
 
 Built as a responsive single-page experience with an accessible dark/light theme, purposeful motion, and a technical work archive instead of generic portfolio cards.
+
+> This portfolio was created as a giveaway to celebrate reaching 1,500 YouTube subscribers. Watch the [giveaway livestream](https://www.youtube.com/live/5Dc5UXLDjv8?si=vWxBUtVN8NJQRsOh).
 
 ![Portfolio preview](./public/projects/commerce-catalog.jpg)
 
@@ -65,11 +67,7 @@ Major page sections live in [`src/sections/`](./src/sections/), while reusable i
 
 The site includes a canonical URL, social sharing metadata, structured data, a web manifest, [`robots.txt`](./public/robots.txt), and [`sitemap.xml`](./public/sitemap.xml).
 
-Before deploying to a custom domain, replace every instance of `https://furqanistic.github.io/portfolio-giveaway/` in the following files:
-
-- [`index.html`](./index.html)
-- [`public/robots.txt`](./public/robots.txt)
-- [`public/sitemap.xml`](./public/sitemap.xml)
+The production URL is [portfolio-giveaway.netlify.app](https://portfolio-giveaway.netlify.app). If you deploy this project elsewhere, update its canonical URL and social preview URLs in [`index.html`](./index.html), [`public/robots.txt`](./public/robots.txt), and [`public/sitemap.xml`](./public/sitemap.xml).
 
 Then validate the live URL with [Google Search Console](https://search.google.com/search-console/about), submit the sitemap, and use each social platform’s preview debugger after deployment.
 
@@ -90,9 +88,4 @@ Issues and focused improvements are welcome. For substantial changes, open an is
 
 ## Contact
 
-**Abdullah Shahid**<br>
-Backend Software Engineer · Faisalabad, Pakistan
-
-- [LinkedIn](https://www.linkedin.com/in/abdullahshd/)
-- [GitHub](https://github.com/mabdshd)
-- [Email](mailto:abdullahbinshahid287@gmail.com)
+Created as a YouTube community giveaway. For the giveaway context, watch the [livestream](https://www.youtube.com/live/5Dc5UXLDjv8?si=vWxBUtVN8NJQRsOh).

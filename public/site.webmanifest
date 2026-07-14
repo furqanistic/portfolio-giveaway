@@ -1,14 +1,14 @@
 {
-  "name": "Abdullah Shahid — Backend Software Engineer",
-  "short_name": "Abdullah Shahid",
-  "description": "Backend software engineer building reliable Laravel systems.",
-  "start_url": "/portfolio-giveaway/",
+  "name": "Portfolio Giveaway — Backend Engineer",
+  "short_name": "Portfolio Giveaway",
+  "description": "A polished backend engineer portfolio giveaway.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#171717",
   "theme_color": "#171717",
   "icons": [
     {
-      "src": "/portfolio-giveaway/favicon.svg",
+      "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
