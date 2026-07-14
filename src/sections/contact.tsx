@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { ArrowUpRight01Icon, CheckmarkCircle01Icon, Copy01Icon } from "hugeicons-react"
-import { Section } from "@/components/section"
 import { Magnetic } from "@/components/magnetic"
 import { useGsap } from "@/lib/use-gsap"
 import { person, projectTypes, budgetRanges } from "@/lib/content"
@@ -15,22 +14,35 @@ export function Contact() {
       duration: 0.6,
       ease: "power3.out",
       stagger: 0.08,
-      scrollTrigger: { trigger: ".contact-inner", start: "top 80%" },
+      scrollTrigger: { trigger: ".contact-reveal", start: "top 80%" },
     })
   })
 
   async function copyEmail() {
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2200)
     try {
+      if (!navigator.clipboard) throw new Error("Clipboard API unavailable")
       await navigator.clipboard.writeText(person.email)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2200)
     } catch {
-      /* clipboard unavailable — no-op, mailto still works */
+      const field = document.createElement("textarea")
+      field.value = person.email
+      field.setAttribute("readonly", "")
+      field.style.position = "fixed"
+      field.style.opacity = "0"
+      document.body.appendChild(field)
+      field.select()
+      document.execCommand("copy")
+      field.remove()
     }
   }
 
   return (
-    <Section id="contact" index="08" eyebrow="Contact">
+    <section id="contact" className="contact-stage relative scroll-mt-8 border-t border-border px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-40">
+      <div className="mb-14 flex items-center gap-3 sm:mb-20">
+        <span className="size-1.5 rounded-full bg-ember" aria-hidden />
+        <span className="eyebrow text-muted-foreground">Contact</span>
+      </div>
       <div ref={ref} className="contact-inner grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
         {/* LEFT — invitation */}
         <div className="contact-reveal flex flex-col justify-between">
@@ -39,8 +51,7 @@ export function Contact() {
               Let's build something <span className="text-ember">reliable.</span>
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-              If you have a backend that needs owning — an API, a marketplace, a platform with real
-              constraints — I'd like to hear about it.
+              Need a reliable API, marketplace, or platform? Let's talk.
             </p>
           </div>
 
@@ -53,7 +64,7 @@ export function Contact() {
               aria-label={copied ? "Email copied" : "Copy email address"}
               className="group inline-flex max-w-full items-center gap-3 text-left"
             >
-              <span className="display text-xl text-foreground transition-colors duration-300 group-hover:text-ember sm:text-2xl">
+              <span className="display break-all text-xl text-foreground transition-colors duration-300 group-hover:text-ember sm:text-2xl">
                 {person.email}
               </span>
               <span className="grid size-8 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-colors duration-300 group-hover:border-ember group-hover:text-ember">
@@ -111,12 +122,20 @@ export function Contact() {
 
         {/* RIGHT — short form */}
         <form
-          className="contact-reveal surface space-y-5 p-6 sm:p-8"
+          className="contact-reveal surface space-y-5 p-6 sm:p-8 lg:p-10"
           onSubmit={(e) => {
             e.preventDefault()
             const data = new FormData(e.currentTarget)
-            const body = `Hi Abdullah,%0D%0A%0D%0A${data.get("message")}`
-            window.location.href = `mailto:${person.email}?subject=Project enquiry&body=${body}`
+            const body = [
+              "Hi Abdullah,",
+              "",
+              String(data.get("message") ?? ""),
+              "",
+              `From: ${data.get("name")} (${data.get("email")})`,
+              `Project: ${data.get("type")}`,
+              `Budget: ${data.get("budget")}`,
+            ].join("\n")
+            window.location.href = `mailto:${person.email}?subject=${encodeURIComponent("Project enquiry")}&body=${encodeURIComponent(body)}`
           }}
         >
           <Field label="Name" name="name" placeholder="Your name" required />
@@ -176,7 +195,7 @@ export function Contact() {
           </Magnetic>
         </form>
       </div>
-    </Section>
+    </section>
   )
 }
 

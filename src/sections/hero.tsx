@@ -1,156 +1,107 @@
 import { ArrowDown01Icon, ArrowUpRight01Icon } from "hugeicons-react"
-import { person, heroStats, heroCapabilities, productionDomains } from "@/lib/content"
-import { useGsap, prefersReducedMotion } from "@/lib/use-gsap"
 import { Magnetic } from "@/components/magnetic"
+import { person, heroCapabilities, productionDomains, projects } from "@/lib/content"
+import { useGsap } from "@/lib/use-gsap"
 
 export function Hero() {
   const ref = useGsap<HTMLElement>(({ gsap, reduced }) => {
     if (reduced) return
 
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } })
+    tl.from(".hero-chrome", { y: -12, opacity: 0, duration: 0.45 })
+      .from(".hero-line-inner", { yPercent: 110, duration: 0.82, stagger: 0.09 }, "-=0.1")
+      .from(".hero-support", { y: 18, opacity: 0, duration: 0.5 }, "-=0.4")
+      .from(".hero-action", { y: 14, opacity: 0, duration: 0.42, stagger: 0.06 }, "-=0.28")
+      .from(".hero-archive", { clipPath: "inset(0 0 100% 0)", y: 24, duration: 0.82 }, "-=0.34")
+      .from(".hero-proof", { opacity: 0, y: 10, duration: 0.4, stagger: 0.05 }, "-=0.28")
 
-    // eyebrow
-    tl.from(".hero-eyebrow", { y: 14, opacity: 0, duration: 0.5 })
-    // headline lines (masked)
-    tl.from(
-      ".hero-line-inner",
-      { yPercent: 115, duration: 0.9, ease: "power4.out", stagger: 0.1 },
-      "-=0.2",
-    )
-    // positioning statement
-    tl.from(".hero-statement", { y: 18, opacity: 0, duration: 0.6 }, "-=0.4")
-    // CTAs
-    tl.from(".hero-cta", { y: 16, opacity: 0, duration: 0.5, stagger: 0.08 }, "-=0.3")
-    // credibility + socials
-    tl.from(".hero-meta", { y: 14, opacity: 0, duration: 0.5, stagger: 0.06 }, "-=0.3")
-    // console reveal via clip
-    tl.from(".hero-console", { opacity: 0, y: 24, duration: 0.8 }, "-=0.7")
-    tl.from(".hero-console-row", { y: 12, opacity: 0, duration: 0.4, stagger: 0.08 }, "-=0.5")
+    gsap.to(".hero-archive-inner", {
+      yPercent: -5,
+      ease: "none",
+      scrollTrigger: { trigger: ref.current, start: "top top", end: "bottom top", scrub: 0.6 },
+    })
   })
 
   return (
-    <section
-      ref={ref}
-      id="intro"
-      className="grain relative isolate flex min-h-[calc(100svh-1.5rem)] flex-col scroll-mt-8"
-    >
-      {/* ── status bar ─────────────────────────────────────── */}
-      <div className="hero-eyebrow flex items-center justify-between border-b border-border px-5 py-4 sm:px-8 lg:px-12">
+    <section ref={ref} id="intro" className="grain relative isolate min-h-svh scroll-mt-8 overflow-hidden">
+      <div className="hero-chrome flex items-center justify-between border-b border-border px-5 py-4 sm:px-8 lg:px-12">
         <div className="flex items-center gap-3">
           <span className="eyebrow text-ember">{person.initials}</span>
           <span className="eyebrow text-muted-foreground">{person.name}</span>
         </div>
-        <div className="hidden items-center gap-2.5 sm:flex">
+        <div className="flex items-center gap-2.5">
           <span className="status-dot" aria-hidden />
-          <span className="eyebrow text-muted-foreground">{person.status}</span>
+          <span className="eyebrow hidden text-muted-foreground sm:inline">{person.status}</span>
+          <span className="eyebrow text-muted-foreground sm:hidden">Available</span>
         </div>
-        <span className="eyebrow text-muted-foreground sm:hidden">FSD · PK</span>
       </div>
 
-      {/* ── main grid ──────────────────────────────────────── */}
-      <div className="relative flex flex-1 flex-col justify-between gap-12 px-5 py-10 sm:px-8 sm:py-12 lg:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(20rem,0.6fr)] lg:gap-16 lg:px-12 lg:py-16">
-        {/* LEFT — narrative */}
-        <div className="flex flex-col justify-center">
-          <div className="hero-eyebrow mb-6 flex items-center gap-3">
+      <div className="px-5 pb-8 pt-12 sm:px-8 sm:pb-10 sm:pt-16 lg:px-12 lg:pb-12 lg:pt-20">
+        <div className="mx-auto max-w-[92rem]">
+          <div className="hero-chrome mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
             <span className="eyebrow text-foreground">{person.role}</span>
-            <span className="h-px w-10 bg-border" />
-            <span className="eyebrow text-muted-foreground">{person.yearsExperience} years</span>
+            <span className="eyebrow text-muted-foreground">{person.yearsExperience} years · {person.location}</span>
           </div>
 
-          <h1 className="display max-w-4xl text-[clamp(2.75rem,7vw,6rem)] text-foreground">
-            <span className="line-mask">
-              <span className="hero-line-inner block">Production backends</span>
-            </span>
-            <span className="line-mask">
-              <span className="hero-line-inner block text-ember">built to stay safe</span>
-            </span>
-            <span className="line-mask">
-              <span className="hero-line-inner block">to change.</span>
-            </span>
+          <h1 className="display w-full max-w-[15ch] text-[clamp(3.25rem,8.15vw,8.75rem)] text-foreground">
+            <span className="line-mask"><span className="hero-line-inner block">Production backends</span></span>
+            <span className="line-mask"><span className="hero-line-inner block"><span className="text-ember">built safe</span> to change.</span></span>
           </h1>
 
-          <p className="hero-statement mt-8 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {person.positioning}
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Magnetic>
-              <a href="#work" className="btn-ember hero-cta">
-                Explore selected work
-                <ArrowUpRight01Icon className="size-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-              </a>
-            </Magnetic>
-            <a href="#contact" className="btn-ghost-line hero-cta">
-              Start a conversation
-              <ArrowUpRight01Icon className="size-4" />
+          <div className="mt-8 grid gap-8 border-t border-border pt-6 lg:grid-cols-[minmax(0,.78fr)_minmax(20rem,.22fr)] lg:items-end">
+            <div>
+              <p className="hero-support max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {person.positioning}
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Magnetic>
+                  <a href="#work" className="hero-action btn-ember group/btn">
+                    Explore selected work
+                    <ArrowUpRight01Icon className="size-4 transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+                  </a>
+                </Magnetic>
+                <a href="#contact" className="hero-action btn-ghost-line">
+                  Start a conversation <ArrowUpRight01Icon className="size-4" />
+                </a>
+              </div>
+            </div>
+            <a href="#work" className="hero-action group hidden items-center justify-between border-b border-border pb-3 text-sm font-medium text-foreground transition-colors hover:border-ember hover:text-ember lg:flex">
+              View the work archive
+              <ArrowDown01Icon className="size-4 transition-transform duration-300 group-hover:translate-y-1" />
             </a>
           </div>
 
-          {/* credibility row */}
-          <dl className="mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-border sm:grid-cols-3">
-            {heroStats.map((s) => (
-              <div key={s.label} className="hero-meta bg-card px-4 py-4">
-                <dt className="display text-2xl text-foreground sm:text-3xl">{s.value}</dt>
-                <dd className="mt-1.5 text-xs leading-snug text-muted-foreground">{s.label}</dd>
+          <div className="hero-archive mt-14 overflow-hidden border border-border bg-card sm:mt-18">
+            <div className="hero-archive-inner grid min-h-[18rem] lg:grid-cols-[minmax(0,.64fr)_minmax(18rem,.36fr)]">
+              <div className="relative flex flex-col justify-between overflow-hidden border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
+                <div className="pointer-events-none absolute -bottom-[.16em] -right-[.05em] select-none font-mono text-[clamp(7rem,18vw,18rem)] font-semibold leading-none tracking-[-0.08em] text-foreground/[0.035]" aria-hidden>
+                  01
+                </div>
+                <div className="relative flex items-center justify-between gap-6">
+                  <span className="eyebrow text-ember">Current feature</span>
+                  <span className="eyebrow text-muted-foreground">{projects[0].category}</span>
+                </div>
+                <div className="relative mt-16 max-w-4xl sm:mt-20">
+                  <p className="display text-[clamp(2rem,5vw,4.75rem)] text-foreground">{projects[0].name}</p>
+                  <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">{projects[0].built}</p>
+                </div>
               </div>
-            ))}
-          </dl>
-        </div>
 
-        {/* RIGHT — system profile console */}
-        <aside className="hero-console console-frame self-start lg:sticky lg:top-6">
-          <div className="flex items-center justify-between border-b border-border px-5 py-4">
-            <div className="flex items-center gap-2">
-              <span className="status-dot" aria-hidden />
-              <span className="eyebrow text-muted-foreground">System profile</span>
-            </div>
-            <span className="font-mono text-[0.6rem] text-muted-foreground">v4.0</span>
-          </div>
-
-          <div className="divide-y divide-border">
-            {heroCapabilities.map((c) => (
-              <div key={c.label} className="hero-console-row grid grid-cols-[1fr] gap-1 px-5 py-4">
-                <p className="text-sm font-semibold text-foreground">{c.label}</p>
-                <p className="font-mono text-[0.66rem] leading-relaxed tracking-wide text-muted-foreground">
-                  {c.value}
-                </p>
+              <div className="grid divide-y divide-border">
+                {heroCapabilities.map((capability) => (
+                  <div key={capability.label} className="hero-proof flex items-start justify-between gap-6 p-5 sm:p-6">
+                    <span className="text-sm font-semibold text-foreground">{capability.label}</span>
+                    <span className="max-w-[15rem] text-right font-mono text-[0.65rem] leading-relaxed text-muted-foreground">{capability.value}</span>
+                  </div>
+                ))}
+                <div className="hero-proof flex flex-wrap gap-x-4 gap-y-2 p-5 sm:p-6">
+                  {productionDomains.map((domain) => <span key={domain} className="eyebrow text-muted-foreground">{domain}</span>)}
+                </div>
               </div>
-            ))}
-          </div>
-
-          <div className="border-t border-border px-5 py-4">
-            <p className="eyebrow mb-3 text-muted-foreground">Production domains</p>
-            <div className="flex flex-wrap gap-1.5">
-              {productionDomains.map((d) => (
-                <span key={d} className="chip">
-                  {d}
-                </span>
-              ))}
             </div>
           </div>
-        </aside>
-      </div>
-
-      {/* ── footer rail ────────────────────────────────────── */}
-      <div className="hero-meta flex items-end justify-between border-t border-border px-5 py-4 sm:px-8 lg:px-12">
-        <div className="font-mono text-[0.66rem] leading-relaxed tracking-wide text-muted-foreground">
-          <p className="uppercase">{person.location}</p>
-          <p className="mt-1 text-foreground">Laravel · PHP · production systems</p>
         </div>
-        <a
-          href="#work"
-          aria-label="Scroll to selected work"
-          className="hero-meta grid size-10 place-items-center rounded-full border border-border text-foreground transition-colors duration-300 hover:border-ember hover:text-ember"
-        >
-          <ArrowDown01Icon className="size-4" />
-        </a>
       </div>
-
-      {prefersReducedMotion() && (
-        <style>{`
-          #intro .hero-line-inner { transform: none !important; }
-        `}</style>
-      )}
     </section>
   )
 }

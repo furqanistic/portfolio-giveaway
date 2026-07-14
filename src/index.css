@@ -198,9 +198,9 @@
 
 /* display heading tightening */
 .display {
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  font-weight: 560;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
 }
 
 /* hairline divider that respects theme */
@@ -227,7 +227,7 @@
   width: 2rem;
   height: 2rem;
   place-items: center;
-  border-radius: 0.6rem;
+  border-radius: 0.45rem;
   background: var(--ember);
   color: var(--ember-foreground);
   font-family: var(--font-mono);
@@ -271,7 +271,7 @@
   gap: 0.5rem;
   height: 2.85rem;
   padding: 0 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: 0.35rem;
   background: var(--ember);
   color: var(--ember-foreground);
   font-size: 0.85rem;
@@ -292,7 +292,7 @@
   gap: 0.5rem;
   height: 2.85rem;
   padding: 0 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: 0.35rem;
   border: 1px solid var(--border);
   color: var(--foreground);
   background: transparent;
@@ -315,7 +315,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0.28rem 0.55rem;
-  border-radius: 99px;
+  border-radius: 0.25rem;
   border: 1px solid var(--border);
   color: var(--muted-foreground);
   background: color-mix(in oklch, var(--foreground) 2%, transparent);
@@ -330,14 +330,14 @@
 .surface {
   position: relative;
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
+  border-radius: 0.45rem;
   background: var(--card);
 }
 
-/* console frame for the hero system-profile */
+/* structured editorial frame */
 .console-frame {
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 0.45rem;
   background:
     linear-gradient(color-mix(in oklch, var(--foreground) 3%, transparent), transparent),
     var(--card);
@@ -354,19 +354,6 @@
   will-change: transform;
 }
 
-/* marquee track */
-.marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 38s linear infinite;
-}
-.marquee-group:hover .marquee {
-  animation-play-state: paused;
-}
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .status-dot::after,
   .marquee {
@@ -376,6 +363,52 @@
   .btn-ghost-line {
     transition: none;
   }
+}
+
+.chapter {
+  background-image: linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), var(--border) calc(100% - 1px));
+}
+
+.editorial-rule {
+  border-color: color-mix(in oklch, var(--foreground) 13%, transparent);
+}
+
+.project-ink {
+  color: color-mix(in oklch, var(--foreground) 7%, var(--card));
+}
+
+@media (max-width: 767px) {
+  body { padding-bottom: 4.5rem; }
+  .chapter { background-image: none; }
+}
+
+.contact-stage {
+  --contact-bg: var(--foreground);
+  --contact-fg: var(--background);
+  background: var(--contact-bg);
+  color: var(--contact-fg);
+}
+.contact-stage .text-foreground { color: var(--contact-fg); }
+.contact-stage .text-muted-foreground { color: color-mix(in oklch, var(--contact-fg) 62%, transparent); }
+.contact-stage .border-border { border-color: color-mix(in oklch, var(--contact-fg) 16%, transparent); }
+.contact-stage .bg-card { background: color-mix(in oklch, var(--contact-fg) 5%, var(--contact-bg)); }
+.contact-stage .bg-background { background: color-mix(in oklch, var(--contact-fg) 4%, var(--contact-bg)); }
+.contact-stage .surface {
+  background: color-mix(in oklch, var(--contact-fg) 5%, var(--contact-bg));
+  border-color: color-mix(in oklch, var(--contact-fg) 16%, transparent);
+}
+.contact-stage .btn-ghost-line {
+  color: var(--contact-fg);
+  border-color: color-mix(in oklch, var(--contact-fg) 22%, transparent);
+}
+.contact-stage .btn-ghost-line:hover {
+  border-color: var(--ember);
+  background: color-mix(in oklch, var(--ember) 12%, transparent);
+}
+.contact-stage input,
+.contact-stage select,
+.contact-stage textarea {
+  color: var(--contact-fg);
 }
 
 /* ── Smooth scrolling ───────────────────────────────────────

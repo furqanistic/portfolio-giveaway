@@ -1,188 +1,145 @@
-import { ArrowUpRight01Icon } from "hugeicons-react"
-import { Section } from "@/components/section"
-import { CursorLabel } from "@/components/cursor-label"
-import { SplitText } from "@/components/split-text"
+import { projects, type Project } from "@/lib/content"
 import { useGsap } from "@/lib/use-gsap"
-import { projects } from "@/lib/content"
+import { cn } from "@/lib/utils"
+
+const projectImages: Record<string, { src: string; alt: string }> = {
+  "marketplace-backend": {
+    src: "/projects/commerce-catalog.jpg",
+    alt: "Dark commerce catalog interface with inventory table and selected product details",
+  },
+  "consultation-platform": {
+    src: "/projects/healthcare-scheduling.jpg",
+    alt: "Healthcare scheduling interface with appointments and patient consultation details",
+  },
+}
 
 export function SelectedWork() {
-  const featured = projects.find((p) => p.featured) ?? projects[0]
-  const index = projects.filter((p) => p.id !== featured.id)
-
-  const stickyRef = useGsap<HTMLDivElement>(({ gsap, reduced }) => {
+  const ref = useGsap<HTMLElement>(({ gsap, reduced }) => {
     if (reduced) return
-    // subtle parallax on the featured visual
-    gsap.to(".work-featured-visual", {
-      yPercent: -12,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".work-featured",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    })
-    // index rows reveal
-    gsap.utils.toArray<HTMLElement>(".work-index-row").forEach((row) => {
-      gsap.from(row, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        scrollTrigger: { trigger: row, start: "top 88%" },
+
+    gsap.utils.toArray<HTMLElement>(".project-spread").forEach((project) => {
+      const copy = project.querySelectorAll(".project-copy")
+      const image = project.querySelector(".project-image")
+
+      gsap.from(copy, {
+        y: 28,
+        duration: 0.7,
+        ease: "power4.out",
+        stagger: 0.06,
+        scrollTrigger: { trigger: project, start: "top 82%" },
       })
+
+      if (image) {
+        gsap.from(image, {
+          clipPath: "inset(0 0 100% 0)",
+          scale: 1.035,
+          duration: 1,
+          ease: "power4.inOut",
+          scrollTrigger: { trigger: image, start: "top 88%" },
+        })
+      }
     })
   })
 
   return (
-    <Section
+    <section
+      ref={ref}
       id="work"
-      index="01"
-      eyebrow="Selected Work"
-      title="Backends that carry real product weight."
-      intro="Two systems where the work mattered: live commerce under continuous delivery, and a healthcare platform where state and permissions had to be unambiguous."
+      className="relative scroll-mt-8 border-t border-border px-5 py-12 sm:px-8 lg:px-12"
     >
-      <div ref={stickyRef}>
-        {/* ── Featured project — sticky text, scrolling visual ── */}
-        <article className="work-featured grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
-          <div className="lg:sticky lg:top-8 lg:self-start">
-            <div className="mb-5 flex items-center gap-3">
-              <span className="eyebrow text-ember">Featured · {featured.index}</span>
-              <span className="eyebrow text-muted-foreground">{featured.category}</span>
-            </div>
-            <SplitText
-              lines={[featured.name]}
-              as="h3"
-              className="display mb-6 text-[clamp(1.75rem,3.5vw,2.75rem)] text-foreground"
-            />
+      <header className="mb-10 flex items-center gap-3">
+        <span className="size-1.5 rounded-full bg-ember" aria-hidden />
+        <span className="eyebrow text-muted-foreground">Selected Work</span>
+      </header>
 
-            <dl className="space-y-5 text-sm">
-              <div>
-                <dt className="eyebrow mb-1.5 text-muted-foreground">The problem</dt>
-                <dd className="leading-relaxed text-muted-foreground">{featured.problem}</dd>
-              </div>
-              <div>
-                <dt className="eyebrow mb-1.5 text-muted-foreground">My role</dt>
-                <dd className="leading-relaxed text-foreground">{featured.role}</dd>
-              </div>
-              <div>
-                <dt className="eyebrow mb-1.5 text-muted-foreground">Key challenge</dt>
-                <dd className="leading-relaxed text-muted-foreground">{featured.challenge}</dd>
-              </div>
-              <div>
-                <dt className="eyebrow mb-1.5 text-muted-foreground">Result</dt>
-                <dd className="leading-relaxed text-foreground">{featured.result}</dd>
-              </div>
-            </dl>
-
-            <div className="mt-6 flex flex-wrap gap-1.5">
-              {featured.tech.map((t) => (
-                <span key={t} className="chip">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* scrolling visual — abstract system map, not a fake dashboard */}
-          <CursorLabel label="System" className="h-full min-h-[28rem] lg:min-h-[40rem]">
-            <div className="surface grain relative h-full w-full overflow-hidden p-6 sm:p-8">
-              <div className="work-featured-visual absolute inset-0 -z-0 opacity-[0.9]">
-                <SystemMap />
-              </div>
-              <div className="relative z-10 flex h-full flex-col justify-between">
-                <div className="flex items-center justify-between">
-                  <span className="eyebrow text-muted-foreground">{featured.index} / System map</span>
-                  <span className="status-dot" aria-hidden />
-                </div>
-                <div className="font-mono text-[0.62rem] leading-relaxed tracking-wide text-muted-foreground">
-                  <p className="text-foreground">catalog → orders → identity → search</p>
-                  <p className="mt-1">payments · caching · queues · integrations</p>
-                </div>
-              </div>
-            </div>
-          </CursorLabel>
-        </article>
-
-        {/* ── Project index — rows with hover preview ──────── */}
-        <div className="mt-20 sm:mt-28">
-          <div className="mb-8 flex items-center gap-3">
-            <span className="eyebrow text-muted-foreground">More work</span>
-            <span className="h-px flex-1 bg-border" />
-          </div>
-          <ul className="divide-y divide-border border-y border-border">
-            {index.map((p) => (
-              <li key={p.id}>
-                <a
-                  href={`#${p.id}`}
-                  className="work-index-row group flex items-baseline justify-between gap-4 py-6 transition-colors duration-300 hover:bg-card/40"
-                >
-                  <div className="flex items-baseline gap-4 sm:gap-6">
-                    <span className="font-mono text-xs text-muted-foreground">{p.index}</span>
-                    <div>
-                      <h3 className="display text-xl text-foreground transition-colors duration-300 group-hover:text-ember sm:text-2xl">
-                        {p.name}
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground">{p.category}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <span className="hidden font-mono text-[0.66rem] uppercase tracking-wide text-muted-foreground sm:inline">
-                      {p.tech.slice(0, 3).join(" · ")}
-                    </span>
-                    <ArrowUpRight01Icon className="size-5 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ember" />
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="mx-auto max-w-[92rem] space-y-24 lg:space-y-20">
+        {projects.map((project, index) => (
+          <ProjectSpread key={project.id} project={project} reverse={index % 2 === 1} />
+        ))}
       </div>
-    </Section>
+    </section>
   )
 }
 
-/** Abstract, editorial system-map graphic — pure SVG, theme-aware, no fake UI. */
-function SystemMap() {
-  const nodes = [
-    { x: 18, y: 22, label: "API" },
-    { x: 50, y: 14, label: "Auth" },
-    { x: 82, y: 26, label: "Search" },
-    { x: 16, y: 64, label: "Orders" },
-    { x: 52, y: 54, label: "Core" },
-    { x: 84, y: 70, label: "Payments" },
-    { x: 38, y: 86, label: "Queues" },
-    { x: 70, y: 90, label: "Cache" },
-  ]
-  const edges: [number, number][] = [
-    [0, 1], [0, 4], [1, 2], [2, 5], [3, 4], [4, 5], [4, 6], [4, 7], [3, 6], [5, 7],
-  ]
+function ProjectSpread({ project, reverse }: { project: Project; reverse: boolean }) {
+  const media = projectImages[project.id]
+
   return (
-    <svg viewBox="0 0 100 100" className="h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden>
-      <g stroke="var(--border)" strokeWidth="0.25" fill="none">
-        {edges.map(([a, b], i) => (
-          <line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} />
-        ))}
-      </g>
-      <g>
-        {nodes.map((n, i) => (
-          <g key={i}>
-            <circle cx={n.x} cy={n.y} r="2.4" fill="var(--card)" stroke="var(--ember)" strokeWidth="0.4" />
-            <circle cx={n.x} cy={n.y} r="0.8" fill="var(--ember)" />
-            <text
-              x={n.x}
-              y={n.y - 4}
-              textAnchor="middle"
-              fontSize="2.1"
-              fontFamily="var(--font-mono)"
-              fill="var(--muted-foreground)"
-              letterSpacing="0.1"
-            >
-              {n.label}
-            </text>
-          </g>
-        ))}
-      </g>
-    </svg>
+    <article id={project.id} className="project-spread scroll-mt-12">
+      <div
+        className={cn(
+          "grid gap-10 lg:items-end lg:gap-16",
+          reverse
+            ? "lg:grid-cols-[minmax(18rem,.42fr)_minmax(0,.58fr)]"
+            : "lg:grid-cols-[minmax(0,.58fr)_minmax(18rem,.42fr)]",
+        )}
+      >
+        {reverse ? (
+          <>
+            <ProjectCopy project={project} />
+            <ProjectImage media={media} className="lg:aspect-[2/1]" />
+          </>
+        ) : (
+          <>
+            <ProjectImage media={media} className="lg:aspect-[2/1]" />
+            <ProjectCopy project={project} />
+          </>
+        )}
+      </div>
+    </article>
+  )
+}
+
+function ProjectCopy({ project }: { project: Project }) {
+  return (
+    <div className="project-copy lg:pb-2">
+      <span className="font-mono text-xs text-ember">{project.index}</span>
+      <h3 className="display mt-5 max-w-[13ch] text-[2.15rem] leading-[0.98] text-foreground sm:text-[clamp(2.65rem,4.1vw,4.7rem)] sm:leading-[0.94]">
+        {project.name}
+      </h3>
+      <div className="mt-8 max-w-md border-t border-border pt-5">
+        <Meta label={project.category} value={project.built} />
+      </div>
+      <div className="mt-8 hidden gap-8 sm:grid sm:grid-cols-2">
+        <Meta label="My role" value={project.role} />
+        <TechList project={project} />
+      </div>
+    </div>
+  )
+}
+
+function ProjectImage({ media, className }: { media: { src: string; alt: string }; className?: string }) {
+  return (
+    <figure className={cn("project-image group relative aspect-[3/2] overflow-hidden bg-card", className)}>
+      <img
+        src={media.src}
+        alt={media.alt}
+        width={1536}
+        height={1024}
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-[1.018] motion-reduce:transition-none"
+      />
+    </figure>
+  )
+}
+
+function Meta({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="project-copy">
+      <p className="eyebrow mb-3 text-muted-foreground">{label}</p>
+      <p className="text-sm leading-relaxed text-muted-foreground">{value}</p>
+    </div>
+  )
+}
+
+function TechList({ project }: { project: Project }) {
+  return (
+    <div className="project-copy">
+      <p className="eyebrow mb-3 text-muted-foreground">Technology</p>
+      <p className="font-mono text-[0.68rem] leading-relaxed uppercase tracking-[0.1em] text-foreground">
+        {project.tech.slice(0, 5).join(" / ")}
+      </p>
+    </div>
   )
 }

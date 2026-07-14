@@ -19,29 +19,27 @@ export function Experiments() {
   return (
     <Section
       id="experiments"
-      index="06"
+      index="02"
       eyebrow="Additional Work"
       title="More systems I've built."
-      intro="Side and adjacent work — smaller in scope, still real backends with real users."
+      intro="Smaller backends built for real users."
     >
-      <div ref={ref} className="grid gap-5 sm:grid-cols-2">
-        {experiments.map((e) => (
+      <div ref={ref} className="border-y border-border">
+        {experiments.map((e, index) => (
           <article
             key={e.name}
-            className="exp-card group surface relative overflow-hidden p-6 transition-colors duration-300 hover:border-ember/40 sm:p-8"
+            className="exp-card group grid gap-6 border-b border-border py-8 last:border-b-0 sm:grid-cols-[4rem_minmax(0,.8fr)_minmax(0,1.2fr)] sm:items-start sm:py-10"
           >
-            <div className="mb-5 flex items-center justify-between">
+            <span className="font-mono text-xs text-ember">0{index + 1}</span>
+            <div>
               <span className="eyebrow text-muted-foreground">{e.kind}</span>
-              <span className="size-2 rounded-full bg-border transition-colors duration-300 group-hover:bg-ember" />
+              <h3 className="display mt-3 text-2xl text-foreground transition-colors duration-300 group-hover:text-ember sm:text-3xl">{e.name}</h3>
             </div>
-            <h3 className="display mb-3 text-xl text-foreground sm:text-2xl">{e.name}</h3>
-            <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{e.body}</p>
-            <div className="flex flex-wrap gap-1.5">
-              {e.tech.map((t) => (
-                <span key={t} className="chip">
-                  {t}
-                </span>
-              ))}
+            <div>
+              <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">{e.body}</p>
+              <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+                {e.tech.map((t) => <span key={t} className="eyebrow text-muted-foreground">{t}</span>)}
+              </div>
             </div>
           </article>
         ))}

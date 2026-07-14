@@ -25,12 +25,12 @@ export function Capabilities() {
   return (
     <Section
       id="capabilities"
-      index="02"
+      index="05"
       eyebrow="Capabilities"
       title="What I can actually build and own."
-      intro="Not a wall of logos. The value I create, the relevant tools, and where I've shipped each one."
+      intro="What I build, the tools I use, and where I've shipped it."
     >
-      <div ref={ref} className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
+      <div ref={ref} className="capability-shell grid gap-10 lg:grid-cols-[minmax(0,.88fr)_minmax(0,1.12fr)] lg:gap-0">
         {/* LEFT — selectable list */}
         <ul className="divide-y divide-border border-y border-border">
           {capabilities.map((c, i) => {
@@ -43,6 +43,7 @@ export function Capabilities() {
                   onFocus={() => setActiveId(c.id)}
                   onClick={() => setActiveId(c.id)}
                   aria-pressed={isActive}
+                  aria-controls="capability-detail"
                   className="cap-row group flex w-full items-center justify-between gap-4 py-5 text-left transition-colors duration-300"
                 >
                   <div className="flex items-baseline gap-4">
@@ -71,8 +72,8 @@ export function Capabilities() {
         </ul>
 
         {/* RIGHT — detail panel keyed to active capability */}
-        <div className="surface grain lg:sticky lg:top-8 lg:self-start">
-          <div key={active.id} className="animate-in fade-in slide-in-from-bottom-2 duration-500 p-6 sm:p-8">
+        <div id="capability-detail" className="capability-detail grain border border-border lg:sticky lg:top-6 lg:self-start lg:border-l-0">
+          <div key={active.id} className="animate-in fade-in slide-in-from-bottom-2 duration-500 p-6 sm:p-10">
             <p className="eyebrow mb-2 text-ember">{active.title}</p>
             <p className="display mb-7 text-[clamp(1.5rem,2.4vw,2rem)] leading-snug text-foreground">
               {active.summary}
@@ -101,12 +102,12 @@ export function Capabilities() {
               </div>
             </div>
 
-            <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border sm:grid-cols-2">
-              <div className="bg-card px-4 py-3">
+            <dl className="grid grid-cols-1 border-t border-border sm:grid-cols-2">
+              <div className="border-b border-border px-0 py-4 sm:border-b-0 sm:border-r sm:pr-5">
                 <dt className="eyebrow mb-1 text-muted-foreground">Example</dt>
                 <dd className="text-sm text-foreground">{active.example}</dd>
               </div>
-              <div className="bg-card px-4 py-3">
+              <div className="px-0 py-4 sm:pl-5">
                 <dt className="eyebrow mb-1 text-muted-foreground">Ownership</dt>
                 <dd className="text-sm text-foreground">{active.ownership}</dd>
               </div>

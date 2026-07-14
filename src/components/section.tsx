@@ -28,23 +28,23 @@ export const Section = forwardRef<HTMLElement, SectionProps>(function Section(
       ref={ref}
       id={id}
       className={cn(
-        "relative scroll-mt-8 px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-28",
+        "chapter relative scroll-mt-8 border-t border-border px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-40",
         className,
       )}
     >
       {showHeader && (
-        <header className="mb-12 flex flex-col gap-6 sm:mb-16 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl">
+        <header className="mb-14 grid gap-8 sm:mb-20 lg:grid-cols-[minmax(12rem,.34fr)_minmax(0,.66fr)] lg:items-start lg:gap-16">
+          <div>
             {eyebrow && (
-              <div className="mb-5 flex items-center gap-3">
-                {index && (
-                  <span className="eyebrow text-ember">{index}</span>
-                )}
+              <div className="flex items-center gap-3">
+                {index && <span className="size-1.5 rounded-full bg-ember" aria-hidden />}
                 <span className="eyebrow text-muted-foreground">{eyebrow}</span>
               </div>
             )}
+          </div>
+          <div className="max-w-4xl">
             {title && (
-              <h2 className="display text-[clamp(2rem,4.5vw,3.5rem)] text-foreground">
+              <h2 className="display text-[clamp(2.35rem,5vw,4.75rem)] text-foreground">
                 {title}
               </h2>
             )}
@@ -54,10 +54,9 @@ export const Section = forwardRef<HTMLElement, SectionProps>(function Section(
               </p>
             )}
           </div>
-          {aside && <div className="shrink-0">{aside}</div>}
+          {aside && <div className="shrink-0 lg:col-start-2">{aside}</div>}
         </header>
       )}
-      <div className="hairline mb-12 sm:mb-16" />
       {children}
     </section>
   )

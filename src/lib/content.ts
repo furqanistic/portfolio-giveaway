@@ -17,10 +17,10 @@ export const person = {
     github: "https://github.com/mabdshd",
   },
   positioning:
-    "I design and maintain production Laravel systems — APIs, authentication, payments, data stores, search, caching, queues, and integrations — engineered to stay safe to change as products evolve.",
+    "I build reliable Laravel backends that stay easy to change.",
   intro: [
-    "I build the parts of a product that have to stay correct under load: request handling, business behavior, and the boundaries where third-party services meet your own code.",
-    "My work is pragmatic. I care about failure paths, explicit permissions, queries that scale, and code that the next engineer can reason about without fear.",
+    "I build backend systems that stay correct under load.",
+    "I focus on clear permissions, scalable queries, and maintainable code.",
   ],
 } as const
 
@@ -75,15 +75,15 @@ export const projects: Project[] = [
     category: "Production commerce platform",
     featured: true,
     problem:
-      "A live marketplace with catalog, ordering, identity, search, payments, and a growing web of third-party integrations — where backend areas had become hard to change without risk.",
+      "A growing marketplace backend had become risky to change.",
     built:
-      "Connected catalog, ordering, administration, identity, search, payment, caching, and asynchronous workflows, maintained under continuous delivery.",
-    role: "Owned REST APIs and backend modules end-to-end across the product surface.",
+      "Built catalog, orders, identity, search, payments, caching, and queues.",
+    role: "Owned REST APIs and backend modules end-to-end.",
     tech: ["Laravel", "MySQL", "MongoDB", "Redis", "Elasticsearch", "Stripe", "PayPal"],
     challenge:
-      "Untangling request handling, business behavior, and third-party concerns so each could evolve independently — without a risky rewrite.",
+      "Separated core logic from requests and third-party services.",
     result:
-      "Clearer service and module boundaries, refined data paths, explicit failure handling, and production code that became easier to reason about and safer to extend.",
+      "Cleaner boundaries, faster data paths, and safer releases.",
   },
   {
     id: "consultation-platform",
@@ -91,15 +91,15 @@ export const projects: Project[] = [
     name: "Doctor Appointment & Consultation Platform",
     category: "Healthcare scheduling system",
     problem:
-      "Connecting patients and doctors through scheduling, role-based access, secure records, and video consultation — where ambiguous state transitions had made the client-side experience unpredictable.",
+      "Unclear consultation states made the client experience unpredictable.",
     built:
-      "APIs and backend modules for scheduling, doctor and patient roles, consultation states, secure records, permissions, and video-call integration.",
-    role: "Built the backend contract and workflow logic consumed by the client team.",
+      "Built scheduling, roles, records, permissions, and video-call APIs.",
+    role: "Defined the API contract and workflow logic.",
     tech: ["Laravel", "MySQL", "RBAC", "Zoom API"],
     challenge:
-      "Making consultation state transitions and access rules explicit so the client could trust the workflow.",
+      "Made states and access rules explicit.",
     result:
-      "Predictable, permission-aware workflows with clear state transitions, giving the client team a reliable contract to build against.",
+      "Predictable workflows and a reliable client contract.",
   },
 ]
 
@@ -119,7 +119,7 @@ export const capabilities: Capability[] = [
     id: "laravel",
     title: "Laravel Engineering",
     summary:
-      "Building and maintaining Laravel applications where the structure has to survive real delivery pressure.",
+      "Laravel applications built for real delivery pressure.",
     builds: [
       "REST APIs and backend modules",
       "Service and module boundaries",
@@ -133,7 +133,7 @@ export const capabilities: Capability[] = [
     id: "data-search",
     title: "Data & Search",
     summary:
-      "Designing schemas and refining the real data paths products depend on — queries, indexes, cache, and search.",
+      "Fast, dependable schemas, queries, cache, and search.",
     builds: [
       "Schema design and migrations",
       "Query and index refinement",
@@ -147,7 +147,7 @@ export const capabilities: Capability[] = [
     id: "security",
     title: "Security & Access",
     summary:
-      "Authentication and authorization that stay correct as roles and surfaces multiply.",
+      "Authentication and access rules that scale with the product.",
     builds: [
       "OAuth 2.0, JWT, Sanctum, Passport",
       "Role-based access control",
@@ -161,7 +161,7 @@ export const capabilities: Capability[] = [
     id: "async",
     title: "Async & Reliability",
     summary:
-      "Background work, retries, and explicit failure paths so operational workflows don't fail silently.",
+      "Queues, retries, and visible failure handling.",
     builds: [
       "Queued and background processing",
       "Retries and failure handling",
@@ -175,7 +175,7 @@ export const capabilities: Capability[] = [
     id: "integrations",
     title: "Integrations & Payments",
     summary:
-      "Connecting payment providers and third-party services with explicit, observable boundaries.",
+      "Clean integrations for payments and third-party services.",
     builds: [
       "Payments: Stripe, PayPal, Hyperwallet",
       "Communication: Zoom, Twilio, Pusher",
@@ -189,7 +189,7 @@ export const capabilities: Capability[] = [
     id: "delivery",
     title: "Delivery & Infrastructure",
     summary:
-      "Shipping safely and often through version control, CI/CD, and containerization.",
+      "Safe, frequent delivery with CI/CD and containers.",
     builds: [
       "Git and Git Flow workflows",
       "CI/CD pipelines",
@@ -225,11 +225,10 @@ export const experience: Role[] = [
     overview:
       "Production e-commerce and marketplace systems with connected data, search, payment, identity, and integration workflows.",
     responsibilities: [
-      "Own REST APIs and backend modules for catalog, orders, authentication, administration, search, payments, and external integrations.",
-      "Design clearer service and module boundaries so request handling, business behavior, and third-party concerns can evolve independently.",
-      "Work across MySQL, MongoDB, Redis, and Elasticsearch — improving real product paths through query, index, cache, and search refinement.",
-      "Implement role-based access, two-factor authentication, queued work, retries, and explicit failure handling for operational workflows.",
-      "Diagnose production behavior and simplify backend areas that became difficult to change safely during ongoing delivery.",
+      "Own APIs for catalog, orders, auth, search, payments, and integrations.",
+      "Create clear service and module boundaries.",
+      "Improve queries, indexes, caching, and search.",
+      "Build RBAC, 2FA, queues, retries, and failure handling.",
     ],
     tech: ["Laravel", "MySQL", "MongoDB", "Redis", "Elasticsearch", "Stripe", "PayPal"],
   },
@@ -285,32 +284,32 @@ export const processSteps = [
   {
     no: "01",
     title: "Understand the problem",
-    body: "Start with the real production pressure — what breaks, what's slow, what's risky to change. Map the actual workflows before touching code.",
+    body: "Find what's broken, slow, or risky. Map the workflow first.",
   },
   {
     no: "02",
     title: "Define the product",
-    body: "Agree on the contract: API shape, roles, permissions, and the states that matter. Make the boundaries explicit so behavior is predictable.",
+    body: "Agree on APIs, roles, permissions, and key states.",
   },
   {
     no: "03",
     title: "Design the data & API",
-    body: "Schema, indexes, queries, cache, and search — designed around the paths the product actually exercises, not theoretical ones.",
+    body: "Design data and APIs around real product usage.",
   },
   {
     no: "04",
     title: "Build the system",
-    body: "Implement modules with clean service boundaries, separating request handling, business behavior, and third-party concerns.",
+    body: "Build focused modules with clean boundaries.",
   },
   {
     no: "05",
     title: "Test & harden",
-    body: "Exercise the failure paths — retries, queues, auth edge cases. Make sure work doesn't fail silently in production.",
+    body: "Test retries, queues, auth, and failure paths.",
   },
   {
     no: "06",
     title: "Launch & improve",
-    body: "Ship through CI/CD, watch production behavior, and simplify the areas that get hard to change over time.",
+    body: "Ship, monitor, and improve what matters.",
   },
 ] as const
 

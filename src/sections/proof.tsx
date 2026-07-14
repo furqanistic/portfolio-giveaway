@@ -18,7 +18,7 @@ export function Proof() {
   return (
     <Section id="proof" index="07" eyebrow="Proof" title="What I bring, stated honestly.">
       <div ref={ref}>
-        <div className="proof-grid grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border sm:grid-cols-2 lg:grid-cols-4">
+        <div className="proof-grid grid grid-flow-dense grid-cols-1 gap-px overflow-hidden border border-border sm:grid-cols-2 lg:grid-cols-4">
           {proof.map((p) => (
             <div key={p.label} className="proof-cell bg-card p-6">
               <p className="eyebrow mb-3 text-ember">{p.label}</p>

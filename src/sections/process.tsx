@@ -6,7 +6,7 @@ export function Process() {
   const ref = useGsap<HTMLDivElement>(({ gsap, reduced }) => {
     if (reduced) return
 
-    // the progress rail fills as you scroll through the steps
+    // A single progress line connects the steps into one system.
     gsap.to(".process-progress", {
       scaleY: 1,
       ease: "none",
@@ -19,9 +19,9 @@ export function Process() {
       },
     })
 
-    gsap.utils.toArray<HTMLElement>(".process-step").forEach((step) => {
+    gsap.utils.toArray<HTMLElement>(".process-step").forEach((step, index) => {
       gsap.from(step, {
-        y: 26,
+        x: index % 2 === 0 ? -20 : 20,
         opacity: 0,
         duration: 0.55,
         ease: "power3.out",
@@ -36,28 +36,25 @@ export function Process() {
       index="05"
       eyebrow="Process"
       title="From a production problem to a launched system."
-      intro="How I work — written so a non-technical client can follow it, not just another engineer."
+      intro="A clear path from problem to production."
     >
       <div ref={ref} className="relative">
-        <ol className="process-list relative grid gap-px sm:grid-cols-2 lg:grid-cols-3">
-          {/* progress rail (desktop horizontal) */}
-          <div className="pointer-events-none absolute inset-x-0 top-[34px] hidden h-px lg:block">
-            <div className="relative h-px w-full bg-border">
-              <div className="process-progress absolute left-0 top-0 h-px w-full origin-left scale-x-0 bg-ember" />
-            </div>
+        <ol className="process-list relative grid gap-x-10 lg:grid-cols-2 lg:gap-x-20">
+          <div className="pointer-events-none absolute bottom-0 left-4 top-0 w-px bg-border lg:left-1/2" aria-hidden>
+            <div className="process-progress h-full w-px origin-top scale-y-0 bg-ember" />
           </div>
 
-          {processSteps.map((step) => (
-            <li key={step.no} className="process-step relative">
-              <div className="group h-full rounded-xl border border-border bg-card p-6 transition-colors duration-300 hover:border-ember/50">
-                <div className="mb-5 flex items-center gap-3">
-                  <span className="grid size-9 place-items-center rounded-full border border-border bg-background font-mono text-xs text-ember transition-colors duration-300 group-hover:border-ember">
-                    {step.no}
-                  </span>
-                  <span className="h-px flex-1 bg-border" />
-                </div>
-                <h3 className="display mb-3 text-lg text-foreground">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+          {processSteps.map((step, index) => (
+            <li
+              key={step.no}
+              className={`process-step relative mb-10 pl-12 lg:mb-0 lg:min-h-52 lg:pl-0 ${index % 2 === 0 ? "lg:pr-16" : "lg:col-start-2 lg:pl-16"}`}
+            >
+              <span className={`absolute left-0 top-1 grid size-8 place-items-center border border-border bg-background font-mono text-[0.65rem] text-ember lg:left-auto ${index % 2 === 0 ? "lg:-right-4" : "lg:-left-4"}`}>
+                {step.no}
+              </span>
+              <div className="border-t border-border pt-6">
+                <h3 className="display mb-3 text-xl text-foreground sm:text-2xl">{step.title}</h3>
+                <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">{step.body}</p>
               </div>
             </li>
           ))}

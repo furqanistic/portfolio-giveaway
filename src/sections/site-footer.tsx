@@ -1,4 +1,4 @@
-import { ArrowUpRight01Icon } from "hugeicons-react"
+import { ArrowUp01Icon, ArrowUpRight01Icon } from "hugeicons-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { person } from "@/lib/content"
 import { navItems } from "@/lib/nav"
@@ -96,9 +96,14 @@ export function SiteFooter() {
         <p className="font-mono text-[0.66rem] uppercase tracking-wide text-muted-foreground">
           © {year} {person.name}
         </p>
-        <p className="font-mono text-[0.66rem] uppercase tracking-wide text-muted-foreground">
-          Built with React · GSAP · Tailwind
-        </p>
+        <div className="flex items-center gap-5">
+          <p className="font-mono text-[0.66rem] uppercase tracking-wide text-muted-foreground">
+            Built with React · GSAP · Tailwind
+          </p>
+          <a href="#intro" className="group inline-flex items-center gap-1.5 text-xs font-semibold text-foreground transition-colors hover:text-ember">
+            Back to top <ArrowUp01Icon className="size-3.5 transition-transform group-hover:-translate-y-0.5" />
+          </a>
+        </div>
       </div>
     </footer>
   )

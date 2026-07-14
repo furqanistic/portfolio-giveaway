@@ -22,7 +22,7 @@ export function Experience() {
       index="04"
       eyebrow="Experience"
       title="Four years owning backend modules in production."
-      intro="From intern to owning the backend of a live marketplace — a steady path through real delivery."
+      intro="From Laravel intern to marketplace backend owner."
     >
       <div ref={ref} className="relative">
         {/* vertical rail */}

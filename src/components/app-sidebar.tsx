@@ -17,7 +17,7 @@ import { smoothScrollTo } from "@/lib/use-lenis"
 import { cn } from "@/lib/utils"
 
 export function AppSidebar() {
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState(false)
   const active = useActiveSection(navItems.map((i) => i.url.slice(1)))
 
   const handleNavClick = (url: string) => {
@@ -28,9 +28,9 @@ export function AppSidebar() {
     <TooltipProvider delayDuration={250}>
       <aside
         className={cn(
-          "flex h-full flex-col overflow-hidden rounded-3xl transition-[width,padding] duration-200 ease-out motion-reduce:transition-none",
-          "border border-border bg-card/70 backdrop-blur-xl",
-          expanded ? "w-[260px] p-3" : "w-[68px] items-center p-3",
+          "flex h-full flex-col overflow-hidden rounded-[1.15rem] transition-[width,padding] duration-300 ease-out motion-reduce:transition-none",
+          "border border-border bg-card/82 shadow-[0_24px_80px_-48px_rgba(0,0,0,.5)] backdrop-blur-xl",
+          expanded ? "w-[224px] p-2.5" : "w-[64px] items-center p-2.5",
         )}
       >
         {/* Header */}
@@ -83,11 +83,11 @@ export function AppSidebar() {
                         onClick={() => handleNavClick(item.url)}
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "flex h-10 w-full items-center rounded-xl transition-colors duration-150 motion-reduce:transition-none",
+                          "group/nav flex h-10 w-full items-center rounded-lg transition-colors duration-200 motion-reduce:transition-none",
                           expanded ? "gap-3 px-3 text-sm font-medium" : "justify-center",
                           isActive
                             ? expanded
-                              ? "bg-foreground text-background shadow-sm"
+                              ? "bg-foreground text-background"
                               : "text-foreground"
                             : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground",
                         )}
