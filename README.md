@@ -14,8 +14,6 @@ Built as a responsive single-page experience with an accessible dark/light theme
 
 > This portfolio was created as a giveaway to celebrate reaching 1,500 YouTube subscribers. Watch the [giveaway livestream](https://www.youtube.com/live/5Dc5UXLDjv8?si=vWxBUtVN8NJQRsOh).
 
-![Portfolio preview](./public/projects/commerce-catalog.jpg)
-
 ## Why this exists
 
 This project is both a personal portfolio and a frontend implementation study: how to present backend work with clear hierarchy, real project context, and lightweight interaction design.
