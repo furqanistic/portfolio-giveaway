@@ -23,10 +23,10 @@
   ],
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "node -r ./lib/envsnap.js vite",
+    "build": "node -r ./lib/envsnap.js tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "node -r ./lib/envsnap.js vite preview"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",
